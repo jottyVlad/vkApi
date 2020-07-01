@@ -24,11 +24,6 @@ class VkAPI:
     """
         USER COMMANDS
     """
-    """
-        Get user by him ID
-
-        :param user_id: Nonrequired user's ID. If None function will return data of current user
-    """
     async def get_user(self, params : dict, user_id=None) -> dict:
         if user_id != None:
             str_req = await self.build_request("users.get", {'user_ids': user_id}.update(params))
