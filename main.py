@@ -46,10 +46,10 @@ class VkAPI:
 
     async def user_report(self, params : dict) -> bool:
         if "user_id" not in params:
-            raise ValueError("'user_id' is not in params")
+            raise AttributeError ("'user_id' is not in params")
         
-        if "type" not in params:
-            raise ValueError("'type' is not in params")
+        elif "type" not in params:
+            raise AttributeError ("'type' is not in params")
         str_req = await self.build_request("users.report", params)
         code = await self.send_request_get_dict(str_req)
         return bool(code)
@@ -83,19 +83,19 @@ class VkAPI:
 
     async def group_add_address(self, params : dict) -> dict:
         if "group_id" not in params:
-            raise ValueError("'group_id' is not in params")
-        if "title" not in params:
-            raise ValueError("'title' is not in params")
-        if "address" not in params:
-            raise ValueError("'address' is not in params")
-        if "country_id" not in params:
-            raise ValueError("'country_id' is not in params")
-        if "city_id" not in params:
-            raise ValueError("'city_id' is not in params")
-        if "latitude" not in params:
-            raise ValueError("'latitude' is not in params")
-        if "longitude" not in params:
-            raise ValueError("'longitude' is not in params")
+            raise AttributeError ("'group_id' is not in params")
+        elif "title" not in params:
+            raise AttributeError ("'title' is not in params")
+        elif "address" not in params:
+            raise AttributeError ("'address' is not in params")
+        elif "country_id" not in params:
+            raise AttributeError ("'country_id' is not in params")
+        elif "city_id" not in params:
+            raise AttributeError ("'city_id' is not in params")
+        elif "latitude" not in params:
+            raise AttributeError ("'latitude' is not in params")
+        elif "longitude" not in params:
+            raise AttributeError ("'longitude' is not in params")
     
         str_req = await self.build_request("groups.addAddress", params)
         response = await self.send_request_get_dict(str_req)
@@ -103,11 +103,95 @@ class VkAPI:
 
     async def group_add_callback(self, params : dict) -> dict:
         if "group_id" not in params:
-            raise ValueError("'group_id' is not in params")
-        if "url" not in params:
-            raise ValueError("'url' is not in params")
-        if "title" not in params:
-            raise ValueError("'title' is not in params")
+            raise AttributeError ("'group_id' is not in params")
+        elif "url" not in params:
+            raise AttributeError ("'url' is not in params")
+        elif "title" not in params:
+            raise AttributeError ("'title' is not in params")
         str_req = await self.build_request("groups.addCallbackServer", params)
+        response = await self.send_request_get_dict(str_req)
+        return response
+
+    async def group_add_link(self, params : dict) -> dict:
+        if "group_id" not in params:
+            raise AttributeError ("'group_id' is not in params")
+        elif "link" not in params:
+            raise AttributeError ("'link' is not in params")
+        str_req = await self.build_request("groups.addLink", params)
+        response = await self.send_request_get_dict(str_req)
+        return response
+
+    async def group_approve_request(self, params : dict) -> dict:
+        if "group_id" not in params:
+            raise AttributeError ("'group_id' is not in params")
+        elif "user_id" not in params:
+            raise AttributeError ("'user_id' is not in params")
+        str_req = await self.build_request("groups.approveRequest", params)
+        response = await self.send_request_get_dict(str_req)
+        return response
+
+    async def group_ban(self, params : dict) -> bool:
+        if "group_id" not in params:
+            raise AttributeError ("'group_id' is not in params")
+        str_req = await self.build_request("groups.ban", params)
+        response = await self.send_request_get_dict(str_req)
+        return bool(response)
+
+    async def group_create(self, params : dict) -> dict:
+        if "title" not in params:
+            raise AttributeError("'title' not in params")
+        str_req = await self.build_request("groups.create", params)
+        response = await self.send_request_get_dict(str_req)
+        return response
+
+    async def group_delete_address(self, params : dict) -> dict:
+        if "group_id" not in params:
+            raise AttributeError ("'group_id' is not in params")
+        elif "address_id" not in params:
+            raise AttributeError ("'address_id' is not in params")
+    
+        str_req = await self.build_request("groups.deleteAddress", params)
+        response = await self.send_request_get_dict(str_req)
+        return response
+
+    async def group_delete_callback(self, params : dict) -> dict:
+        if "group_id" not in params:
+            raise AttributeError ("'group_id' is not in params")
+        elif "server_id" not in params:
+            raise AttributeError ("'server_id' is not in params")
+        str_req = await self.build_request("groups.deleteCallbackServer", params)
+        response = await self.send_request_get_dict(str_req)
+        return response
+
+    async def group_delete_link(self, params : dict) -> dict:
+        if "group_id" not in params:
+            raise AttributeError ("'group_id' is not in params")
+        elif "link_id" not in params:
+            raise AttributeError ("'link_id' is not in params")
+        str_req = await self.build_request("groups.deleteLink", params)
+        response = await self.send_request_get_dict(str_req)
+        return response
+
+    async def group_disable_online(self, params : dict) -> bool:
+        if "group_id" not in params:
+            raise AttributeError ("'group_id' is not in params")
+        str_req = await self.build_request("groups.disableOnline", params)
+        response = await self.send_request_get_dict(str_req)
+        return bool(response)
+
+    async def group_edit(self, params : dict) -> bool:
+        if "group_id" not in params:
+            raise AttributeError ("'group_id' is not in params")
+        str_req = await self.build_request("groups.edit", params)
+        response = await self.send_request_get_dict(str_req)
+        return bool(response)
+
+    async def group_edit_address(self, params : dict) -> dict:
+        if "group_id" not in params:
+            raise AttributeError ("'group_id' is not in params")
+        elif "address_id" not in params:
+            raise AttributeError ("'address_id' is not in params")
+    
+        str_req = await self.build_request("groups.editAddress", params)
         response = await self.send_request_get_dict(str_req)
         return response
