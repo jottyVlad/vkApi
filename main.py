@@ -196,3 +196,18 @@ class VkAPI:
         str_req = await self.build_request("groups.editAddress", params)
         response = await self.send_request_get_dict(str_req)
         return response
+
+    @private
+    async def group_get_longpoll(self, longpoll : BotsLongPoll, group_id : str) -> BotsLongPoll:
+        request = await self.build_request("groups.getLongPollServer", { "group_id": group_id })
+        async with aiohttp.ClientSession() as session:
+            async with session.get(request) as response:
+                q = await response.json()
+                await longpoll.write_longpoll_attrs(q['response']['server'], q['response']['key'], q['response']['ts'])
+
+        return longpoll
+
+    async def create_bot_longpoll(self, group_id : str) -> BotsLongPoll:
+        longpoll = BotsLongPoll()
+        longpoll = await self.group_get_longpoll(longpoll, group_id)
+        return longpoll

@@ -1,2 +1,1 @@
-from vkApi.main import *
-from vkApi.BotsLongPoll import *
+from main import *
