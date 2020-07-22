@@ -1,6 +1,6 @@
-import json
 import aiohttp
 from accessify import private
+from BotsLongPoll import BotsLongPoll
 
 class VkAPI:
     def __init__(self, access_token : str, version : str):
@@ -14,6 +14,7 @@ class VkAPI:
         return req
 
     @private
+    @staticmethod
     async def send_request_get_dict(self, string_request : str):
         async with aiohttp.ClientSession() as session:
             async with session.get(string_request) as response:
